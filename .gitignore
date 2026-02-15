@@ -1,0 +1,14 @@
+[Bb]in/
+[Oo]bj/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/
+.vs/
+.env
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+Thumbs.db
