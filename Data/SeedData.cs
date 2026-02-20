@@ -8,8 +8,17 @@ namespace LibraryManager.Data
         {
             if (context.Authors.Any()) return;
 
-            var author = new Author { Name = "George Orwell", Bio = "English novelist." };
+            var defaultUser = new User
+            {
+                Username = "foo",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("bar")
+            };
+            context.Users.Add(defaultUser);
+            context.SaveChanges(); 
+
+            var author = new Author { Name = "George Orwell", Bio = "English novelist" };
             context.Authors.Add(author);
+            context.SaveChanges(); 
 
             context.Books.AddRange(
                 new Book
@@ -18,7 +27,7 @@ namespace LibraryManager.Data
                     Author = author,
                     PubYear = "1949",
                     Genre = "Dystopian",
-                    UserId = 1
+                    UserId = defaultUser.Id
                 },
                 new Book
                 {
@@ -26,9 +35,10 @@ namespace LibraryManager.Data
                     Author = author,
                     PubYear = "1945",
                     Genre = "Satire",
-                    UserId = 1
+                    UserId = defaultUser.Id
                 }
             );
+
             context.SaveChanges();
         }
     }

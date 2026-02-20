@@ -1,8 +1,58 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Library Manager";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Library Manager</h1>
+    <p class="lead">Manage your personal book collection with ease.</p>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="mt-4">
+            <p class="mb-3">Hello <strong>@User.Identity.Name</strong>!</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">View Books</h5>
+                                    <p class="card-text">Browse your book collection</p>
+                                    <a href="@Url.Action("Index", "Books")" class="btn btn-primary">View Books</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Add Book</h5>
+                                    <p class="card-text">Add a new book to your collection</p>
+                                    <a href="@Url.Action("Create", "Books")" class="btn btn-success">Add Book</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Add Author</h5>
+                                    <p class="card-text">Add new authors to the system</p>
+                                    <a href="@Url.Action("Create", "Authors")" class="btn btn-info">Add Author</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="mt-4">
+            <p class="mb-4">Please log in to manage your book collection.</p>
+            <div class="mt-3">
+                <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg me-3">Login</a>
+                <a href="@Url.Action("Register", "Account")" class="btn btn-outline-primary btn-lg">Register</a>
+            </div>
+        </div>
+    }
 </div>
